@@ -1,3 +1,0 @@
-[submodule "aws-sdk-php"]
-	path = aws-sdk-php
-	url = https://github.com/aws/aws-sdk-php
