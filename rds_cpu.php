@@ -1,6 +1,6 @@
 #!/usr/bin/php
 <?php
-$rundir = realpath(dirname($argv[0]));
+$rundir = dirname(readlink($argv[0]));
 require_once ($rundir . '/rds_config.php');
 
 if (isset($argv['1']) && $argv['1'] == 'autoconf') {

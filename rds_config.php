@@ -1,5 +1,5 @@
 <?php
-$rundir = realpath(dirname($argv[0]));
+$rundir = dirname(readlink($argv[0]));
 require_once ($rundir . '/aws.phar');
 
 use Aws\CloudWatch\CloudWatchClient;
