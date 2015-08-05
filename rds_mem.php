@@ -13,9 +13,10 @@ graph_args --base 1000 -l 0
 graph_vlabel Freeable Memory
 graph_category AWS_RDS
 graph_info This graph shows the freeable memory in the RDS.
-aws_rds_connection.label memory
-aws_rds_connection.draw LINE2
-aws_rds_connection.info The current freeable memory.
+aws_rds_mem.label memory
+aws_rds_mem.draw LINE2
+aws_rds_mem.info The current freeable memory.
+aws_rds_mem.warning 104857600:
 
 EOM;
 	
