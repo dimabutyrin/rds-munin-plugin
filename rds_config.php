@@ -1,17 +1,21 @@
 <?php
-$rundir = dirname(readlink($argv[0]));
 require_once ($rundir . '/aws.phar');
+
+// Capture nodename from filename
+$filename = basename($_SERVER['PHP_SELF']);
+preg_match('/^rds_.*_(.*)$/', $filename, $matches);
+$nodename = $matches[1];
 
 use Aws\CloudWatch\CloudWatchClient;
 
-// AWS認証
+// AWS IAM Credentials
 $client = CloudWatchClient::factory(array(
 	'key'    => 'KEY',
 	'secret' => 'SECRET-KEY',
 	'region' => 'REGION'
 ));
 
-// 監視対象RDSインスタンス
+// RDS dimension
 $dimensions = array(
-	array('Name' => 'DBInstanceIdentifier', 'Value' => 'InstanceID'),
+	array('Name' => 'DBInstanceIdentifier', 'Value' => $nodename),
 );

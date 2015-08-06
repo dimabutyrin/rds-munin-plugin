@@ -1,10 +1,20 @@
-rds-munin-plugin
+rds-munin-wildcard
 ================
 
-AWS RDS Munin Plugin
+AWS RDS Wildcard Munin Plugin
 
-## 使い方
+## Installation and configuration
 
-- AWS RDS Munin PluginをMuninが稼働しているサーバの /usr/share/munin/plugins/ に配置します
-- AWS SDK PHPのPharパッケージファイルをダウンロードします [download the packaged Phar](http://pear.amazonwebservices.com/get/aws.phar)
-- rds_config.phpを開いてAWSの認証キー及び、監視対象RDSのインスタンスIDを記述します
+- Checkout repository into munin's libdir (cd /usr/share/munin/plugins/ && git clone https://github.com/dimabutyrin/rds-munin-wildcard.git)
+- Download AWS SDK PHP Phar package into repository root folder (wget http://pear.amazonwebservices.com/get/aws.phar)
+- Create IAM user in AWS Management Console, write down it's "Access Key ID" and "Secret Access Key"
+- Attach CloudWatchReadOnlyAccess policy to the user account created at the previous step
+- Change AWS IAM credentials in rds_config.php
+- Create symlinks in munin's servicedir directory:
+
+node=<YOUR-RDS-DB-INSTANCE-ID>
+sudo ln -s /usr/share/munin/plugins/rds-munin-wildcard/rds_conn_ /etc/munin/plugins/rds_conn_$node;
+sudo ln -s /usr/share/munin/plugins/rds-munin-wildcard/rds_mem_ /etc/munin/plugins/rds_mem_$node;
+sudo ln -s /usr/share/munin/plugins/rds-munin-wildcard/rds_cpu_ /etc/munin/plugins/rds_cpu_$node;
+
+- Run this for every node you want to monitor by changing <YOUR-RDS-DB-INSTANCE-ID>

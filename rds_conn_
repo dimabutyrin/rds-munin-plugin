@@ -8,14 +8,14 @@ if (isset($argv['1']) && $argv['1'] == 'autoconf') {
 } else if (isset($argv['1']) && $argv['1']== 'config') {
 	
 	echo <<<EOM
-graph_title AWS RDS CPU Utilization
+graph_title $nodename DB Connections
 graph_args --base 1000 -l 0
-graph_vlabel CPU Utilization
+graph_vlabel DB Connections
 graph_category AWS_RDS
-graph_info This graph shows the CPU utilization in the system.
-aws_rds_cpu.label usage
-aws_rds_cpu.draw LINE2
-aws_rds_cpu.info The current CPU utilization.
+graph_info This graph shows the number of connections in the RDS.
+aws_rds_connection.label number
+aws_rds_connection.draw LINE2
+aws_rds_connection.info The current number of connections.
 
 EOM;
 	
@@ -23,7 +23,7 @@ EOM;
 
 	$result = $client->getMetricStatistics(array(
 		'Namespace'  => 'AWS/RDS',
-		'MetricName' => 'CPUUtilization',
+		'MetricName' => 'DatabaseConnections',
 		'Dimensions' => $dimensions,
 		'StartTime'  => strtotime('-5 min'),
 		'EndTime'    => strtotime('now'),
@@ -31,7 +31,7 @@ EOM;
 		'Statistics' => array('Maximum'),
 	));
 	foreach ($result['Datapoints'] as $val) {
-		echo 'aws_rds_cpu.value ' . $val['Maximum'] . "\n";
+		echo 'aws_rds_connection.value ' . $val['Maximum'] . "\n";
 	}
 
 }

@@ -8,7 +8,7 @@ if (isset($argv['1']) && $argv['1'] == 'autoconf') {
 } else if (isset($argv['1']) && $argv['1']== 'config') {
 	
 	echo <<<EOM
-graph_title AWS RDS Freeable Memory
+graph_title $nodename Freeable Memory
 graph_args --base 1000 -l 0
 graph_vlabel Freeable Memory
 graph_category AWS_RDS
