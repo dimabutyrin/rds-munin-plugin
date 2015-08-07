@@ -12,8 +12,8 @@ graph_title $nodename Queue Depth
 graph_args --base 1000 -l 0
 graph_vlabel Queue Depth
 graph_category AWS_RDS
-graph_info This graph shows the number of outstanding IOs waiting to access the disk
-aws_rds_queue.label usage
+graph_info This graph shows the number of outstanding IOs waiting to access the disk.
+aws_rds_queue.label queue
 aws_rds_queue.draw LINE2
 aws_rds_queue.info The current Queue Depth.
 

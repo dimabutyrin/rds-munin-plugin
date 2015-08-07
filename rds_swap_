@@ -12,7 +12,7 @@ graph_title $nodename Swap Usage
 graph_args --base 1000 -l 0
 graph_vlabel Swap Usage
 graph_category AWS_RDS
-graph_info This graph shows the number of outstanding IOs waiting to access the disk
+graph_info The amount of swap space used on the DB Instance.
 aws_rds_swap.label usage
 aws_rds_swap.draw LINE2
 aws_rds_swap.info The current Swap Usage.
