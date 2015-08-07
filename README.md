@@ -22,5 +22,7 @@ node=%YOUR-RDS-DB-INSTANCE-ID%
 sudo ln -s /usr/share/munin/plugins/rds-munin-wildcard/rds_conn_ /etc/munin/plugins/rds_conn_$node;  
 sudo ln -s /usr/share/munin/plugins/rds-munin-wildcard/rds_mem_ /etc/munin/plugins/rds_mem_$node;  
 sudo ln -s /usr/share/munin/plugins/rds-munin-wildcard/rds_cpu_ /etc/munin/plugins/rds_cpu_$node;  
+sudo ln -s /usr/share/munin/plugins/rds-munin-wildcard/rds_swap_ /etc/munin/plugins/rds_swap_$node;  
+sudo ln -s /usr/share/munin/plugins/rds-munin-wildcard/rds_queue_ /etc/munin/plugins/rds_queue_$node;  
 ```
 - Run this for every node you want to monitor by changing %YOUR-RDS-DB-INSTANCE-ID%
