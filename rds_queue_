@@ -1,0 +1,37 @@
+#!/usr/bin/php
+<?php
+$rundir = dirname(readlink($argv[0]));
+require_once ($rundir . '/rds_config.php');
+
+if (isset($argv['1']) && $argv['1'] == 'autoconf') {
+	echo 'yes' . "\n";
+} else if (isset($argv['1']) && $argv['1']== 'config') {
+	
+	echo <<<EOM
+graph_title $nodename Queue Depth
+graph_args --base 1000 -l 0
+graph_vlabel Queue Depth
+graph_category AWS_RDS
+graph_info This graph shows the number of outstanding IOs waiting to access the disk
+aws_rds_queue.label usage
+aws_rds_queue.draw LINE2
+aws_rds_queue.info The current Queue Depth.
+
+EOM;
+	
+} else {
+
+	$result = $client->getMetricStatistics(array(
+		'Namespace'  => 'AWS/RDS',
+		'MetricName' => 'DiskQueueDepth',
+		'Dimensions' => $dimensions,
+		'StartTime'  => strtotime('-5 min'),
+		'EndTime'    => strtotime('now'),
+		'Period'     => 300,
+		'Statistics' => array('Maximum'),
+	));
+	foreach ($result['Datapoints'] as $val) {
+		echo 'aws_rds_queue.value ' . $val['Maximum'] . "\n";
+	}
+
+}
